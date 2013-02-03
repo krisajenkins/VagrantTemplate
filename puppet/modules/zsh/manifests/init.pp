@@ -7,4 +7,9 @@ class zsh {
     source => "puppet:///modules/zsh/zshrc",
     ensure => present;
   }
+
+  user {"vagrant":
+    require => Package["zsh"],
+    shell => "/bin/zsh";
+  }
 }
