@@ -1,7 +1,8 @@
 class java {
+  include base
+
   exec { "add-java-repo":
     command => "/usr/bin/add-apt-repository --yes ppa:webupd8team/java",
-    require => Package["python-software-properties"];
   }
 
   exec { "make-java-available":
@@ -18,6 +19,6 @@ class java {
     require => [File["/var/cache/debconf/java7.seeds"],
                 Exec["make-java-available"]],
     responsefile => "/var/cache/debconf/java7.seeds",
-    ensure => "installed";
+    ensure => installed;
   }
 }
