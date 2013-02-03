@@ -1,0 +1,13 @@
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[merge]
+	tool = vimdiff
+[alias]
+	tree = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --decorate
+	rom = rebase -i origin/master
+[rebase]
+	autosquash = true
+[rerere]
+	enabled = 1
