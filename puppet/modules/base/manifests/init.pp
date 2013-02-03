@@ -3,9 +3,9 @@ class base {
     command => "/usr/bin/apt-get update";
   }
 
-  package { "apt-utils":
-    ensure => installed;
-  }
+  package { "apt-utils": ensure => installed; }
+  package { "curl": ensure => installed; }
+  package { "wget": ensure => installed; }
 
   package { "python-software-properties":
     require => Exec["apt-update"],
