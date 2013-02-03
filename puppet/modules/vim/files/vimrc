@@ -1,0 +1,6 @@
+set number
+set hidden
+set background=dark
+set hlsearch
+set ignorecase
+set incsearch
