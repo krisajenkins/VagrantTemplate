@@ -1,0 +1,61 @@
+;;; Package magic.
+(require 'package)
+
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(package-initialize)
+
+(when (not package-archive-contents)
+    (package-refresh-contents))
+
+(defvar my-packages '(evil key-chord helm elscreen ace-jump-mode surround recentf magit)
+  "A list of packages to ensure are installed at launch.")
+
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)
+	(require p)))
+
+(custom-set-variables
+ '(evil-mode 1)
+ '(global-surround-mode 1)
+ '(key-chord-mode 1)
+ '(global-hl-line-mode t)
+ '(inhibit-startup-screen t)
+ '(require-final-newline t)
+ '(recentf-mode 1)
+ '(helm-mode 1)
+ '(transient-mark-mode t)
+ '(visible-bell t)
+ '(background-mode dark))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Evil.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(evil-mode 1)
+
+(key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
+
+(define-key evil-normal-state-map "gt" 'elscreen-next)
+(define-key evil-normal-state-map "gT" 'elscreen-previous)
+(define-key evil-normal-state-map ",tn" 'elscreen-create)
+(define-key evil-normal-state-map ",tk" 'elscreen-kill)
+
+(elscreen-start)
+
+(defun my-helm-mini ()
+  "Preconfigured `helm' lightweight version \(buffer -> recentf\)."
+  (interactive)
+  (helm-other-buffer '(
+					   helm-c-source-elscreen
+					   helm-c-source-buffers-list
+					   helm-c-source-recentf
+					   helm-c-source-bookmarks
+					   helm-c-source-buffer-not-found
+					   )
+					 "*helm mini*"))
+
+(define-key evil-normal-state-map ",h" 'my-helm-mini)
+(define-key evil-normal-state-map ",gs" 'magit-status)
+(define-key evil-normal-state-map ",u" 'undo-tree-visualize)
