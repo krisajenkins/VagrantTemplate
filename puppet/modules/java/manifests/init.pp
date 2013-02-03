@@ -1,12 +1,8 @@
 class java {
   exec { "add-java-repo":
     require => Package["python-software-properties"],
-    command => "/usr/bin/add-apt-repository --yes ppa:webupd8team/java",
-  }
-
-  exec { "make-java-available":
-    command => "/usr/bin/apt-get update",
-    require => Exec["add-java-repo"];
+    command => "/usr/bin/add-apt-repository --yes ppa:webupd8team/java ; apt-get update",
+	creates => "/etc/apt/sources.list.d/webupd8team-java-precise.list"
   }
 
   file { "/var/cache/debconf/java7.seeds":
@@ -15,7 +11,7 @@ class java {
   }
 
   package { "oracle-java7-installer":
-    require => [Exec["make-java-available"],
+    require => [Exec["add-java-repo"],
                 File["/var/cache/debconf/java7.seeds"]],
     responsefile => "/var/cache/debconf/java7.seeds",
     ensure => "installed",

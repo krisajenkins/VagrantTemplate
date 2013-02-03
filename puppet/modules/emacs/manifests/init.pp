@@ -1,12 +1,8 @@
 class emacs {
   exec { "add-emacs-repo":
     require => Package["python-software-properties"],
-    command => "/usr/bin/add-apt-repository --yes ppa:cassou/emacs",
-  }
-
-  exec { "make-emacs-available":
-    command => "/usr/bin/apt-get update",
-    require => Exec["add-emacs-repo"];
+    command => "/usr/bin/add-apt-repository --yes ppa:cassou/emacs ; apt-get update",
+	creates => "/etc/apt/sources.list.d/cassou-emacs-precise.list"
   }
 
   package { "emacs":
@@ -19,8 +15,7 @@ class emacs {
   }
 
   package { "emacs24":
-    require => Exec["make-emacs-available"],
+    require => Exec["add-emacs-repo"],
     ensure => installed;
   }
-
 }
