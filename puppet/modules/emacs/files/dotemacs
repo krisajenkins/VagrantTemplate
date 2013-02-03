@@ -4,7 +4,7 @@
 (require 'package)
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 
 (package-initialize)
 
@@ -19,24 +19,21 @@
     (package-install p)
 	(require p)))
 
+(global-hl-line-mode 1)
+(global-surround-mode 1)
+
 (custom-set-variables
- '(evil-mode 1)
- '(global-surround-mode 1)
- '(key-chord-mode 1)
- '(global-hl-line-mode t)
+ '(background-mode dark)
  '(inhibit-startup-screen t)
  '(require-final-newline t)
- '(recentf-mode 1)
- '(helm-mode 1)
- '(transient-mark-mode t)
- '(visible-bell t)
- '(background-mode dark))
+ '(transient-mark-mode 1)
+ '(visible-bell t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Evil.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (evil-mode 1)
-
+(key-chord-mode 1)
 (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
 
 (define-key evil-normal-state-map "gt" 'elscreen-next)
@@ -48,6 +45,8 @@
 
 (elscreen-start)
 
+(helm-mode 1)
+(recentf-mode 1)
 (defun my-helm-mini ()
   "Preconfigured `helm' lightweight version \(buffer -> recentf\)."
   (interactive)
