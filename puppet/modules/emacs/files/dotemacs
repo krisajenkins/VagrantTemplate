@@ -41,6 +41,8 @@
 (define-key evil-normal-state-map "gT" 'elscreen-previous)
 (define-key evil-normal-state-map ",tn" 'elscreen-create)
 (define-key evil-normal-state-map ",tk" 'elscreen-kill)
+(evil-ex-define-cmd "tabn[ew]" 'elscreen-create)
+(evil-ex-define-cmd "tabc[lose]" 'elscreen-kill)
 
 (elscreen-start)
 
