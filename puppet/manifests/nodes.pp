@@ -4,5 +4,6 @@ node "precise64" {
   include emacs
   include zsh
   include git
+  include screen
   include java
 }

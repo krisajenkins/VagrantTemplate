@@ -1,0 +1,6 @@
+shell -$SHELL
+term screen-256color
+defscrollback 5000
+startup_message off
+hardstatus string "[%H: screen %n: %t]"
+caption always "%H %= %-w%L>%{= BW}%n*%t%{-}%52<%+w %L="
