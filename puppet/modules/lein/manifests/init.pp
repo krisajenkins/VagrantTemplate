@@ -25,5 +25,6 @@ class lein {
   exec {"install-lein":
     require => File["/home/vagrant/bin/lein"],
     command => "/home/vagrant/bin/lein",
+    creates => "/home/vagrant/.lein/self-installs/leiningen-2.0.0-standalone.jar",
   }
 }
