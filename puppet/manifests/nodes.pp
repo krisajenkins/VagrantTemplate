@@ -6,4 +6,6 @@ node "precise64" {
   include git
   include screen
   include java
+  include mongodb
+  include lein
 }
