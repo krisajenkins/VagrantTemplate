@@ -12,7 +12,7 @@
     (package-refresh-contents))
 
 (defvar my-packages '(evil key-chord helm elscreen ace-jump-mode surround recentf magit)
-  "A list of packages to ensure are installed at launch.")
+  "A list of packages to check for and install at launch.")
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
